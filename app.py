@@ -2,7 +2,7 @@ import streamlit as st
 from openai import OpenAI
 
 st.markdown('''
-    :red[그림] :orange[그리는] :green[인공] :blue[지능] :violet[!] text.''')
+    :red[그림] :orange[그리는] :green[인공] :blue[지능] :violet[!].''')
 openai_api_key = st.text_input("Enter your OpenAI API Key", type="password")
 
 if openai_api_key:
