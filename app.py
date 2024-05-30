@@ -1,18 +1,16 @@
 import streamlit as st
 from openai import OpenAI
 
-@st.cache_data
-def generate_image(image_prompt):
- client=OpenAI(api_key=st.session_state['OPENAI_API_KET'])
- response = client.images.generate(
-  model="dall-e-3",
-  precpt=image_prompt,
- )
- image_url=response.data[0].url
- return image_url
-st.session_state['image_prompt'] = st.text_input("어떤 그림을 원하시나요?",value=st.session_state.get("image_prompt",''))
+st.markdown('''
+    :red[그림] :orange[그리는] :green[인공] :blue[지능] :violet[!] text.''')
+openai_api_key = st.text_input("Enter your OpenAI API Key", type="password")
 
-if st.button("Run"):
- with st.spinner("Generating..."):
-  image_url = generate_image(st.session_state['image_prompt'])
-  st.markdown(f"{st.session_state['image_prompt']} ![]({image_url})")
+if openai_api_key:
+    client = OpenAI(api_key=openai_api_key)
+
+    user_prompt = st.text_input("그림을 그릴 수 있게 적절한 프롬프트를 작성하세요")
+
+    if user_prompt:
+        response = client.images.generate(model="dall-e-3", prompt=user_prompt)
+        image_url = response.data[0].url
+        st.markdown(f"![Generated Image]({image_url})")
