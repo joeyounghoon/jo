@@ -15,4 +15,4 @@ st.session_state['image_prompt'] = st.text_input("어떤 그림을 원하시나�
 if st.button("Run"):
  with st.spinner("Generating..."):
   image_url = generate_image(st.session_state['image_prompt'])
-  st.markdown(f"{({st.session_state['image_prompt']}){(image_url)}}")
+  st.markdown(f"{st.session_state['image_prompt']} ![]({image_url})")
